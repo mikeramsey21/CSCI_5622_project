@@ -1,0 +1,71 @@
+# This class defines a policy on the Game_State states
+# 
+# NOTES:
+# 	Note 1 		- The variable "states" keeps track of all possible states of the action_round 
+# 				  variable for which we might need to take an action. The "actions" variable keeps
+#				  track of all possible actions for each state in the "states" variable. Together,
+#				  these two lists are used to build a dictionary which holds the policy_function.
+#
+# REFERENCES:
+# 	[S&B, 2018]	 	- "Reinforcement Learning: An Introduction" by Sutton & Barto (2018)
+
+### CONSTANTS
+
+STATES = [(), ('Ch','B'), ('B','B'), ('Ch','B','B','B'), ('B','B','B','B'), ('Ch'), ('B'), ('Ch','B','B'), ('B','B','B'), ('Ch','B','B','B','B')]
+ACTIONS = [('Ch','B'), ('F','C','B'), ('F','C','B'), ('F','C','B'), ('F','C'), ('Ch','B'), ('F','C','B'), ('F','C','B'), ('F','C','B'), ('F','C')]
+
+class Policy:
+	### CONSTRUCTORS
+
+	# Construct policy from policy dictionary
+	def __init__(self, policy_dict):
+		self.policy_function = policy_dict
+
+	# Construct uniform policy
+	@classmethod
+	def create_uniform_policy(cls):
+		policy_dict = {}
+		for is_same_suit in range(2):
+			for high_card in range(13):
+				for low_card in range(13):
+					for state_idx in range(len(STATES)):
+						for action in ACTIONS[state_idx]:
+							full_state = (is_same_suit, high_card, low_card, STATES[state_idx], action)
+							policy_dict[full_state] = 1.0/len(ACTIONS[state_idx])
+
+		return cls(policy_dict)
+
+	# Construct policy by loading policy dictionary from file
+	@classmethod
+	def create_policy_from_file(cls, filename):
+		import pickle
+		with open('obj/' + filename + '.pkl', 'rb') as f:
+			return cls(pickle.load(f))
+
+	### FUNCTION FOR SAVING POLICY
+
+	# Save the policy dictionary to file
+	def save_policy_to_file(self, filename):
+		import pickle
+		with open('obj/' + filename + '.pkl', 'wb') as f:
+			pickle.dump(self.policy_function, f, pickle.HIGHEST_PROTOCOL)
+
+	### FUNCTIONS FOR UPDATING POLICY
+
+	# Updates policy in accordance with algorithm on p. 81 of [S&B, 2018]
+	def update_policy(self, opt_state_action, epsilon = 0.01):
+		is_same_suit = opt_state_action[0]
+		high_card = opt_state_action[1]
+		low_card = opt_state_action[2]
+		state = opt_state_action[3]
+		opt_action = opt_state_action[4]
+		state_idx = STATES.index(state)
+		for action in ACTIONS[state_idx]:
+			if action == opt_action:
+				self.policy_function[(is_same_suit, high_card, low_card, state, action)] = 1 - epsilon + epsilon/len(ACTIONS[state_idx])
+			else:
+				self.policy_function[(is_same_suit, high_card, low_card, state, action)] = epsilon/len(ACTIONS[state_idx])
+
+
+
+
