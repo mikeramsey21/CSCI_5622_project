@@ -136,6 +136,10 @@ while True:
 		elif gs.is_winner() == 0: # Draw
 			intermediate_payoffs_1[-1] += pot/2.0
 			intermediate_payoffs_2[-1] += pot/2.0
+		
+		# We update State_Action_Value_Function based on states visited and actual actions taken in that state.
+		# Then we update the policy based on the "most valuable" action from all the states we visited. This is
+		# done after updating the state action value function.
 
 		# Update player 1 policy and state action value function
 		G = 0.0

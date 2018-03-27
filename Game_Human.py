@@ -20,7 +20,7 @@ policy_suffix = ".policy"
 savf_suffix = ".savf"
 obj_path = "obj/"
 
-bot_name = "bot_3" # Name of bot to play against. Will load existing bot or create new one.
+bot_name = "bot_1" # Name of bot to play against. Will load existing bot or create new one.
 
 # Load/create bot
 if os.path.isfile(obj_path + bot_name + policy_suffix) and os.path.isfile(obj_path + bot_name + savf_suffix):

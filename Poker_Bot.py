@@ -214,13 +214,13 @@ class Policy:
 	# Returns greedy action for current_state. If muliple actions are equal, one is picked randomly
 	# This function is actually wrong. The "greedy action" is with respect to the state action
 	# value function, not the policy function.
-	def greedy_action(self, current_state):
-		state = current_state[3]
-		state_idx = STATES.index(state)
-		actions = ACTIONS[state_idx]
-		max_value_action = max(actions)
-		optimal_idx = [i for i, j in enumerate(actions) if j == max_value_action]	
-		return (current_state[0], current_state[1], current_state[2], state, actions[random.choice(optimal_idx)])
+	#def greedy_action(self, current_state):
+	#	state = current_state[3]
+	#	state_idx = STATES.index(state)
+	#	actions = ACTIONS[state_idx]
+	#	max_value_action = max(actions)
+	#	optimal_idx = [i for i, j in enumerate(actions) if j == max_value_action]	
+	#	return (current_state[0], current_state[1], current_state[2], state, actions[random.choice(optimal_idx)])
 
 	# Updates policy in accordance with algorithm on p. 81 of [S&B 2018]
 	def update(self, opt_state_action, epsilon = 0.01):
