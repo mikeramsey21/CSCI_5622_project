@@ -57,7 +57,7 @@ learning_rate = 0.05
 epsilon = 0.20
 player_turn = 0 # Player 1 starts if 0, otherwise player 2 starts
 
-no_training_rounds = 100000
+no_training_rounds = 1000
 while True:
 	for training_round in range(no_training_rounds):
 		# Start new round and deal cards
