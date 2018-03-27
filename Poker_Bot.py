@@ -173,9 +173,10 @@ class Policy:
 	@classmethod
 	def create_uniform(cls):
 		policy_dict = {}
+		no_updates_dict = {}
 		for is_same_suit in range(2):
 			for high_card in range(13):
-				for low_card in range(13):
+				for low_card in range(high_card + 1):
 					for state_idx in range(len(STATES)):
 						for action in ACTIONS[state_idx]:
 							full_state = (is_same_suit, high_card, low_card, STATES[state_idx], action)
@@ -263,7 +264,7 @@ class State_Action_Value_Function:
 		state_action_value_dict = {}
 		for is_same_suit in range(2):
 			for high_card in range(13):
-				for low_card in range(13):
+				for low_card in range(high_card + 1):
 					for state_idx in range(len(STATES)):
 						for action in ACTIONS[state_idx]:
 							full_state = (is_same_suit, high_card, low_card, STATES[state_idx], action)

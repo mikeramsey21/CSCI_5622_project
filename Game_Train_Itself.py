@@ -15,9 +15,10 @@ import pickle
 policy_suffix = ".policy"
 savf_suffix = ".savf"
 obj_path = "obj/"
+sh_offset = 0 # Offset snapshot numbering
 
-bot_name_1 = "bot_1"
-bot_name_2 = "bot_2"
+bot_name_1 = "bot_3"
+bot_name_2 = "bot_4"
 
 # Load/create first bot
 if os.path.isfile(obj_path + bot_name_1 + policy_suffix) and os.path.isfile(obj_path + bot_name_1 + savf_suffix):
@@ -159,15 +160,25 @@ while True:
 	
 		if (training_round % 1000) == 0:
 			print("Training round " + str(training_round) + " complete...")
+	# End for
+
+	# Save snapshot of progress
+	print('Saving policies and state action value functions...')
+	p1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + training_round+1) +  policy_suffix)
+	q1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + training_round+1) + savf_suffix)
+	p2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + training_round+1) + policy_suffix)
+	q2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + training_round+1) + savf_suffix)
+	print('Policies and state action value functions saved')
+	
+	# Save policies and state action value functions to disk
+	print('Saving policies and state action value functions...')
+	p1.save_to_file(bot_name_1 + policy_suffix)
+	q1.save_to_file(bot_name_1 + savf_suffix)
+	p2.save_to_file(bot_name_2 + policy_suffix)
+	q2.save_to_file(bot_name_2 + savf_suffix)
+	print('Policies and state action value functions saved')
 	
 	if os.path.isfile("quit"):
 		break
 # End while
 
-# Save policies and state action value functions to disk
-print('Saving policies and state action value functions...')
-p1.save_to_file(bot_name_1 + policy_suffix)
-q1.save_to_file(bot_name_1 + savf_suffix)
-p2.save_to_file(bot_name_2 + policy_suffix)
-q2.save_to_file(bot_name_2 + savf_suffix)
-print('Policies and state action value functions saved')
