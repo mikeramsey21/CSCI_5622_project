@@ -17,8 +17,8 @@ savf_suffix = ".savf"
 obj_path = "obj/"
 sh_offset = 0 # Offset snapshot numbering
 
-bot_name_1 = "bot_3"
-bot_name_2 = "bot_4"
+bot_name_1 = "bot_10"
+bot_name_2 = "bot_11"
 
 # Load/create first bot
 if os.path.isfile(obj_path + bot_name_1 + policy_suffix) and os.path.isfile(obj_path + bot_name_1 + savf_suffix):
@@ -57,7 +57,8 @@ learning_rate = 0.05
 epsilon = 0.20
 player_turn = 0 # Player 1 starts if 0, otherwise player 2 starts
 
-no_training_rounds = 1000
+no_training_rounds = 100000
+no_completed_epochs = 0
 while True:
 	for training_round in range(no_training_rounds):
 		# Start new round and deal cards
@@ -163,12 +164,13 @@ while True:
 	# End for
 
 	# Save snapshot of progress
+	no_completed_epochs += 1
 	print('Saving policies and state action value functions...')
-	p1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + training_round+1) +  policy_suffix)
-	q1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + training_round+1) + savf_suffix)
-	p2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + training_round+1) + policy_suffix)
-	q2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + training_round+1) + savf_suffix)
-	print('Policies and state action value functions saved')
+	p1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + no_completed_epochs*(training_round+1)) +  policy_suffix)
+	q1.save_to_file(bot_name_1 + "_sh" + str(sh_offset + no_completed_epochs*(training_round+1)) + savf_suffix)
+	p2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + no_completed_epochs*(training_round+1)) + policy_suffix)
+	q2.save_to_file(bot_name_2 + "_sh" + str(sh_offset + no_completed_epochs*(training_round+1)) + savf_suffix)
+	print('Policies and state action value functions snap shots saved')
 	
 	# Save policies and state action value functions to disk
 	print('Saving policies and state action value functions...')
