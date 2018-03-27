@@ -6,16 +6,35 @@ from deuces import Evaluator
 from Poker_Bot import Game_State
 from Poker_Bot import Policy
 from Poker_Bot import State_Action_Value_Function
+import os
 
 human_capital = 0.0
 ai_capital = 0.0
 gs = Game_State()
-p = Policy.create_uniform()
-q = State_Action_Value_Function.create_uniform()
 round_count = 1
 learning_rate = 0.05
 epsilon = 0.05
 is_button = 1 # If AI is button
+
+policy_suffix = ".policy"
+savf_suffix = ".savf"
+obj_path = "obj/"
+
+bot_name = "bot_3" # Name of bot to play against. Will load existing bot or create new one.
+
+# Load/create bot
+if os.path.isfile(obj_path + bot_name + policy_suffix) and os.path.isfile(obj_path + bot_name + savf_suffix):
+	print("Loading existing data for " + bot_name + "...")
+	p = Policy.create_from_file(bot_name + policy_suffix)
+	print("Loaded " + bot_name + " policy file")
+	q = State_Action_Value_Function.create_from_file(bot_name + savf_suffix)
+	print("Loaded " + bot_name + " state action value function file")
+else:
+	print("Policy and state action value function files don't exist for " + bot_name + ". Create new ones...")
+	p = Policy.create_uniform()
+	print("New policy function created for " + bot_name)
+	q = State_Action_Value_Function.create_uniform()
+	print("New policy function created for " + bot_name)
 
 while True:
 	# Start new round and deal cards
