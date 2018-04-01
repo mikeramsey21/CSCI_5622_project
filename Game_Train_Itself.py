@@ -55,7 +55,6 @@ else:
 gs = Game_State()
 learning_rate = 0.05
 epsilon = 0.20
-player_turn = 0 # Player 1 starts if 0, otherwise player 2 starts
 
 no_training_rounds = 100000
 no_completed_epochs = 0
@@ -68,7 +67,8 @@ while True:
 		gs.set_opponent_cards(deck.draw(2))
 		gs.set_flop(deck.draw(3))
 		pot = 0.0
-	
+		player_turn = training_round % 2 # Player 1 starts if 0, otherwise player 2 starts
+
 		# Go through betting
 		visited_action_states_1 = []
 		visited_action_states_2 = []
