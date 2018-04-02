@@ -100,7 +100,7 @@ class Game_State:
 		else:
 			return []
 
-	def get_current_state_id(self):
+	def get_current_ai_state_id(self):
 		# current_state_id encodes the current state as follows:
 		# current_state_id[0]: Indicates whether or not the player's two cards are the same suit
 		# current_state_id[1]: Value of the player's high card
@@ -113,6 +113,22 @@ class Game_State:
 			high_card = Card.get_rank_int(self.player_cards[1])
 			low_card = Card.get_rank_int(self.player_cards[0])
 		is_same_suit = Card.get_suit_int(self.player_cards[0]) == Card.get_suit_int(self.player_cards[1])
+		current_state_id = (int(is_same_suit),high_card,low_card,tuple(self.action_round))
+		return current_state_id
+	
+	def get_current_opponent_state_id(self):
+		# current_state_id encodes the current state as follows:
+		# current_state_id[0]: Indicates whether or not the player's two cards are the same suit
+		# current_state_id[1]: Value of the player's high card
+		# current_state_id[2]: Value of the player's low card
+		# current_state_id[3]: The actions taken, as stored in self.action_round
+		if Card.get_rank_int(self.opponent_cards[0]) >= Card.get_rank_int(self.opponent_cards[1]):
+			high_card = Card.get_rank_int(self.opponent_cards[0])
+			low_card = Card.get_rank_int(self.oppnent_cards[1])
+		else:
+			high_card = Card.get_rank_int(self.opponent_cards[1])
+			low_card = Card.get_rank_int(self.opponent_cards[0])
+		is_same_suit = Card.get_suit_int(self.opponent_cards[0]) == Card.get_suit_int(self.opponent_cards[1])
 		current_state_id = (int(is_same_suit),high_card,low_card,tuple(self.action_round))
 		return current_state_id
 

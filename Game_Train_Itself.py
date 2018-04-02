@@ -78,8 +78,8 @@ while True:
 		player_2_fold_f = False # Flag for keeping track of if player 2 has folded
 		raise_f = False # Flag for keeping track of if any subsequent "bets" are in fact raises
 		while gs.get_possible_actions():
-			cs = gs.get_current_state_id()
 			if player_turn == 0:
+				cs = gs.get_current_ai_state_id()
 				action = p1.draw_action(cs)
 				gs.append_action(action)
 				visited_action_states_1.append((cs[0], cs[1], cs[2], cs[3], action))
@@ -103,6 +103,7 @@ while True:
 					print('ERROR: No valid action taken by ' + bot_name_1 + '. The taken action is: ' + str(action) + '. Current state is: ' + str(cs))
 
 			else:
+				cs = gs.get_current_opponent_state_id()
 				action = p2.draw_action(cs)
 				gs.append_action(action)
 				visited_action_states_2.append((cs[0], cs[1], cs[2], cs[3], action))
