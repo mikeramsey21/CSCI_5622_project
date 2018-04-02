@@ -8,15 +8,16 @@ from Poker_Bot import State_Action_Value_Function
 import os
 import numpy as np
 import pickle
+import matplotlib.pyplot as plt
 
 # The suffixes needed to load the dictionary files
 policy_suffix = ".policy"
 savf_suffix = ".savf"
 
 # Parameters
-bot_name = "bot_11" # The bot that you want to view
+bot_name = "bot_46_ep2_lr001" # The bot that you want to view
 obj_path = "snaps/"  # The folder that your bot is in
-tot_snap = 37       # The total number of bot snapshots
+tot_snap = 36       # The total number of bot snapshots
 
 # Initialize matrices to stor2 information
 prob_bet = np.zeros((tot_snap,10))
@@ -114,3 +115,14 @@ print(savf_bet)
 print("The folding SAVF")
 print("AA, AKS, QJs, QJ, A8, 56, 77, 22, 72s, 72")
 print(savf_fold)
+
+# Plot some stuff
+no_plot_col = 4
+no_plot_row = 3
+titles = ['AA', 'AKs', 'QJs', 'QJ', 'A8', '56', '77', '22', '72s', '72']
+fig, axes = plt.subplots(no_plot_row, no_plot_col)
+for fidx in range(0,10):
+	axes[fidx/no_plot_col, fidx%no_plot_col].plot(savf_bet[:,fidx])
+	axes[fidx/no_plot_col, fidx%no_plot_col].set_title(titles[fidx])
+	axes[fidx/no_plot_col, fidx%no_plot_col].grid()
+plt.show()
