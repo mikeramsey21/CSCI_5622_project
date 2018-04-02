@@ -124,7 +124,7 @@ class Game_State:
 		# current_state_id[3]: The actions taken, as stored in self.action_round
 		if Card.get_rank_int(self.opponent_cards[0]) >= Card.get_rank_int(self.opponent_cards[1]):
 			high_card = Card.get_rank_int(self.opponent_cards[0])
-			low_card = Card.get_rank_int(self.oppnent_cards[1])
+			low_card = Card.get_rank_int(self.opponent_cards[1])
 		else:
 			high_card = Card.get_rank_int(self.opponent_cards[1])
 			low_card = Card.get_rank_int(self.opponent_cards[0])
