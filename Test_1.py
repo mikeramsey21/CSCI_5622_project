@@ -180,8 +180,9 @@ while True:
 
     #############################################
     # Save the winnings vector
-    np.savetxt(bot_name_1+'_winnings',winnings)
-    #############################################
+	with open('eval/' + bot_name_1 + '_winnings' + '.win', 'wb') as f:
+		pickle.dump(winnings, f, pickle.HIGHEST_PROTOCOL)
+	#############################################
 
     # Save snapshot of progress
     no_completed_epochs += 1
