@@ -1,6 +1,6 @@
 
 		
-def predetermined_policy(cls):
+def predetermined_policy():
     """
     Function returns a policy dictionary where the policy is predetermined according to
     the following strategy: (1) if high card is >=Jack or have a pair, then bet if possible and 
@@ -53,5 +53,5 @@ def predetermined_policy(cls):
                         else:
                             full_state = (is_same_suit, high_card, low_card, STATES[state_idx], 'F')
                             policy_dict[full_state] = 1
-    return cls(policy_dict)
+    return policy_dict
 
