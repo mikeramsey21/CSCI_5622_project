@@ -1,3 +1,10 @@
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
+"""
+
 ### MODULE NAME: 	Poker_Bot
 ### 
 ### DESCRIPTION: 	This module contains functions and classes for the poker bot.
@@ -5,17 +12,23 @@
 ### REFERENCES: 	
 ### 	[S&B 2018]	 	- "Reinforcement Learning: An Introduction" by Sutton & Barto (2018)
 
+# Load necessary libraries
+# Note: We require the deuces library (currently only made for python 2
 from deuces import Card
 from deuces import Deck
 from deuces import Evaluator
 import pickle
 import random
 
+# Initialize state space and and corrsponding actions that the player is allowed to take
+# Ch: Check, B: Bet, C: call, F:Fold
 STATES = [(), ('Ch','B'), ('B','B'), ('Ch','B','B','B'), ('B','B','B','B'), ('Ch',), ('B',), ('Ch','B','B'), ('B','B','B'), ('Ch','B','B','B','B')]
 ACTIONS = [('Ch','B'), ('F','C','B'), ('F','C','B'), ('F','C','B'), ('F','C'), ('Ch','B'), ('F','C','B'), ('F','C','B'), ('F','C','B'), ('F','C')]
-STATE_TYPE_1 = [(), ('Ch',)]
-STATE_TYPE_2 = [('Ch','B'), ('Ch','B','B','B'), ('B','B'), ('Ch','B','B'), ('B',), ('B','B','B')]
-STATE_TYPE_3 = [('B','B','B','B'), ('Ch','B','B','B','B')]
+
+# Subset of state spaces, which dictates betting actions
+STATE_TYPE_1 = [(), ('Ch',)] # First betting round
+STATE_TYPE_2 = [('Ch','B'), ('Ch','B','B','B'), ('B','B'), ('Ch','B','B'), ('B',), ('B','B','B')] # Second betting round
+STATE_TYPE_3 = [('B','B','B','B'), ('Ch','B','B','B','B')] # Third betting round
 
 # CLASS NAME:	Game_State
 #
