@@ -1,3 +1,18 @@
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
+
+Date Created: 04/01/18
+Last Updated: 9/18/2018
+
+This is a python script that reads a bot's SAVF and policy used for error analysis. 
+We make sure the bot is learning to bet on high value hands and fold on low-value hands.
+We also plot the SAVF every 100,000 hands to track how the bot is learning and to see
+if the bot converges (SAVF converges in a sense).
+"""
+
 # Load the necessary packages
 from deuces import Card
 from deuces import Deck
@@ -19,13 +34,13 @@ bot_name = "bot_46_ep2_lr001" # The bot that you want to view
 obj_path = "snaps/"  # The folder that your bot is in
 tot_snap = 36       # The total number of bot snapshots
 
-# Initialize matrices to stor2 information
+# Initialize matrices to store information
 prob_bet = np.zeros((tot_snap,10))
 prob_fold = np.zeros((tot_snap,10))
 savf_bet = np.zeros((tot_snap,10))
 savf_fold = np.zeros((tot_snap,10))
 
-
+# Loop through the total number of bot snapshots available
 count = 0
 for i in range(0,tot_snap):
 
@@ -116,7 +131,7 @@ print("The folding SAVF")
 print("AA, AKS, QJs, QJ, A8, 56, 77, 22, 72s, 72")
 print(savf_fold)
 
-# Plot some stuff
+# Plot the results
 no_plot_col = 4
 no_plot_row = 3
 titles = ['AA', 'AKs', 'QJs', 'QJ', 'A8', '56', '77', '22', '72s', '72']

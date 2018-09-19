@@ -1,6 +1,20 @@
-# This script is used to test How a poker bot trains against an already trained bot.
-# We will keep track of the accumulated winnings.
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
 
+Date Created: 04/01/18
+Last Updated: 9/18/2018
+
+This is a python script that trains a completely new bot against an already trained bot.
+We keep track of the total accumulated winnings of the non-trained bot to see how quickly
+the bot learns. We see that for most bots, they start off with zero accumulated winnings,
+then lose winnings at the begginning of training, and then eventually make back their losses.
+The trained bots end up outperforming the bot with the set strategy. 
+"""
+
+# Import necessary packages
 from deuces import Card
 from deuces import Deck
 from deuces import Evaluator
@@ -18,10 +32,10 @@ savf_suffix = ".savf"
 obj_path = "obj/"
 sh_offset = 0  # Offset snapshot numbering
 
+#############################################################
 bot_name_1 = "bot_10" # The bot that we are training
 bot_name_2 = "bot_11" # The bot we are not training
 
-#############################################################
 # Decide if we want to train bot_name_1
 trainbot1 = False 
 #############################################################

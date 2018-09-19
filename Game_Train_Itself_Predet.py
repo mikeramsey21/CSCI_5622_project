@@ -1,5 +1,20 @@
-# This script is used to train Poker_Bot against an instance of itself
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
 
+Date Created: 04/01/18
+Last Updated: 9/18/2018
+
+This is a python script that trains an instance of a Poker_bot against a predetermined strategey.
+This file is is similar to Game_Train_Itself.py, however we deleted the learning update for bot
+2. This script allows us to see how a bot learns against a set strategy.
+
+Note: You can make your own policy function by using the script "predetermined_policy.py"
+"""
+
+# Import necessary packages
 from deuces import Card
 from deuces import Deck
 from deuces import Evaluator
@@ -10,7 +25,9 @@ from predetermined_policy import predetermined_policy
 import os
 import pickle 
 
-
+#######################
+# LIST BOT NAMES HERE #
+#######################
 sh_offset = 0 # Offset snapshot numbering
 bot_name_1 = "bot_predet_1"
 bot_name_2 = "bot_predet_2"
@@ -134,7 +151,7 @@ while True:
 			G += intermediate_payoffs_2[i]
 			q2.update(s, G, learning_rate)
 			greedy_action = q2.greedy_action(visited_action_states_2[i])
-			#p2.update(greedy_action, epsilon)
+			#p2.update(greedy_action, epsilon) # DELETED UPDATE HERE
 	
 		if (training_round % 1000) == 0:
 			print("Training round " + str(training_round) + " complete...")

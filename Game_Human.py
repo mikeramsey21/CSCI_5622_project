@@ -1,5 +1,16 @@
-# This script runs a game for the poker AI against a human player
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
 
+Date Created: 04/01/18
+Last Updated: 9/18/2018
+
+This is a python script that runs a game of poker against a human player.
+"""
+
+# Import necessary packages
 from deuces import Card
 from deuces import Deck
 from deuces import Evaluator
@@ -8,6 +19,7 @@ from Poker_Bot import Policy
 from Poker_Bot import State_Action_Value_Function
 import os
 
+# Initialize game parameters
 human_capital = 0.0
 ai_capital = 0.0
 gs = Game_State()

@@ -1,5 +1,16 @@
-# This script is used to train Poker_Bot against an instance of itself
+"""
+Michael Ramsey
+Osman Malik
+Erik Johnson
+Kwan Ho Lee
 
+Date Created: 04/01/18
+Last Updated: 9/18/2018
+
+This is a python script that trains an instance of a Poker_bot against itself
+"""
+
+# Import necessary packages
 from deuces import Card
 from deuces import Deck
 from deuces import Evaluator
@@ -17,6 +28,10 @@ savf_suffix = ".savf"
 obj_path = "obj/"
 sh_offset = 0 # Offset snapshot numbering
 
+##########################
+# LIST DESIRED BOTS HERE #
+##########################
+# Can be new dots or old bots
 bot_name_1 = "bot_10"
 bot_name_2 = "bot_11"
 
